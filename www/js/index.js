@@ -38,6 +38,7 @@ var app = {
         document.addEventListener('volumeupbutton', onVolume, false);
         document.getElementById('getpicture').addEventListener('click', getPicture, false);
         document.getElementById('testhole').addEventListener('click', testhole, false);
+        document.getElementById('contact').addEventListener('click', addContact, false);
     },
 
     // deviceready Event Handler
@@ -145,4 +146,35 @@ function translate(lang) {
                 }
             },'Language', ['Nederlands','English']);
     }
+}
+
+function addContact() {
+    var options      = new ContactFindOptions();
+    options.filter   = "Will E Coyote"; //filter on this
+    options.multiple = true; //allow multiple results
+    var fields       = ["displayName", "name"]; //search these fields
+
+    var contact = navigator.contacts.find(fields,
+        function(res){
+            console.log("Search successful.");
+            console.log(res);
+            if(res.length == 0){ //contact doesn't exist
+                console.log("adding contact");
+                var cont = navigator.contacts.create({"displayName":"Will E Coyote"});
+                cont.emails = [new ContactField("Work", "willecoyote@acme.com", false)];
+                cont.name = {
+                    familyName : "Coyote",
+                    givenName:"Will",
+                    middleName : "E"
+                };
+                cont.save();
+            }
+            else{
+                navigator.notification.alert("Contact exists!");
+            }
+        },
+        function(){
+            console.log("Search failed.")
+        }
+        , options);
 }
