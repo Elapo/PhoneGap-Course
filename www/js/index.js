@@ -45,6 +45,10 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        navigator.globalization.getPreferredLanguage(function (language) {
+                translate(language.value)
+            }
+        );
         showCarrierTypeMessage();
         getLocation();
         app.receivedEvent('deviceready');
@@ -114,4 +118,31 @@ function testhole() {
     function () {
         navigator.notification.alert("Measurement failed :(");
     });
+}
+
+function translate(lang) {
+    console.log(lang);
+    if(lang == "nl-BE"){
+        document.getElementById("lblConType").innerHTML = "Type connectie:";//there's a better way to do this, probably
+        document.getElementById("lblLat").innerHTML = "Latitude:";
+        document.getElementById("lblLong").innerHTML = "Longitude:";
+        document.getElementById("lblData").innerHTML = "Data van de meting:";
+    }
+    else if(lang == "en_GB" || lang == "en-US"){
+        document.getElementById("lblConType").innerHTML = "Connection type:";
+        document.getElementById("lblLat").innerHTML = "Latitude:";
+        document.getElementById("lblLong").innerHTML = "Longitude:";
+        document.getElementById("lblData").innerHTML = "Measuring data:";
+    }
+    else{
+        navigator.notification.confirm(
+            'Your system language is not supported, what language would you like to use?', function (index) {
+                if(index){
+                    translate("nl-BE");
+                }
+                else{
+                    translate("en-GB")
+                }
+            },'Language', ['Nederlands','English']);
+    }
 }
