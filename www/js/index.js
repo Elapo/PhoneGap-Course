@@ -39,6 +39,8 @@ var app = {
         document.getElementById('getpicture').addEventListener('click', getPicture, false);
         document.getElementById('testhole').addEventListener('click', testhole, false);
         document.getElementById('contact').addEventListener('click', addContact, false);
+        document.getElementById('selectsong').addEventListener('click', playSong, false);
+        document.getElementById('openbrowser').addEventListener('click', browse, false);
     },
 
     // deviceready Event Handler
@@ -177,4 +179,25 @@ function addContact() {
             console.log("Search failed.")
         }
         , options);
+}
+
+function playSong() {
+    var song;
+    fileChooser.open(function(uri) {
+        console.log(uri);
+         song = new Media(uri, null, function (err) {
+             console.log(err);
+         });
+         song.setVolume(0.5);
+         song.play();
+         console.log("Playing");
+         window.setTimeout(function () {
+             console.log("Stopping");
+             song.stop();
+         }, 4000); //prevent playing for too long
+    });
+}
+
+function browse() {
+    window.open('http://apache.org', '_blank', 'location=yes');
 }
