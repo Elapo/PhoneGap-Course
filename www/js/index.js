@@ -40,8 +40,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        showCarrierTypeMessage();
         app.receivedEvent('deviceready');
-        changeGreetingOnMobile();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -50,6 +50,18 @@ var app = {
     }
 };
 
-function changeGreetingOnMobile() {
-    document.getElementById("greeting").innerHTML = "Hello, App User."
+function showCarrierTypeMessage() {
+    switch (app.connectionType){
+        case "wifi":
+            navigator.notification.alert("We are not doing repairs at home.");
+            break;
+        case "none":
+            navigator.notification.alert("Sorry you almost tumbled. Please report this later when connected to a network.");
+            break;
+        case "cellular":
+        case "unknown":
+        default:
+            //no message required
+            break;
+    }
 }
