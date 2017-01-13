@@ -41,6 +41,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        changeGreetingOnMobile();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -48,3 +49,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function changeGreetingOnMobile() {
+    document.getElementById("greeting").innerHTML = "Hello, App User."
+}
