@@ -51,6 +51,7 @@ var app = {
 };
 
 function showCarrierTypeMessage() {
+    document.getElementById("connectioninput").value = app.connectionType;
     switch (app.connectionType){
         case "wifi":
             navigator.notification.alert("We are not doing repairs at home.");
