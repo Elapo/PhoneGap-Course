@@ -36,6 +36,12 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "com.megster.cordova.FileChooser": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {

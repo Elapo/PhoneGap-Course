@@ -36,7 +36,8 @@ var app = {
         document.addEventListener('resume', onResume, false);
         document.addEventListener('volumedownbutton', onVolume, false);
         document.addEventListener('volumeupbutton', onVolume, false);
-        document.getElementById('getpicture').addEventListener('click', getPicture(), false);
+        document.getElementById('getpicture').addEventListener('click', getPicture, false);
+        document.getElementById('testhole').addEventListener('click', testhole, false);
     },
 
     // deviceready Event Handler
@@ -73,11 +74,11 @@ function showCarrierTypeMessage() {
 }
 
 function onResume() {
-    navigator.notification.alert("Welcome back!");
+    //navigator.notification.alert("Welcome back!");
 }
 
 function onVolume() {
-    navigator.notification.alert("Not implemented yet :(");
+    //navigator.notification.alert("Not implemented yet :(");
 }
 
 function getLocation(){
@@ -88,14 +89,29 @@ function getLocation(){
 }
 
 function getPicture() {
-    console.log("Getting pic...");
-    var selected = document.getElementById("selectedpicture");
-    if(app.connectionType == "Cellular"){
+    console.log(app.connectionType);
+    var selected = document.getElementById("selectedpic");
+
+    if(app.connectionType == "Cellular" || app.connectionType == "unknown"){ //cellular can bug out and become unknown sometimes
         navigator.camera.getPicture(function (uri) {
             selected.src = uri;
-        });
+        }, null, {quality:75});
     }
     else{
-        //pick from library
+        fileChooser.open(function(uri) {
+            selected.src = uri;
+        });
+        //plugin add http://github.com/don/cordova-filechooser.git
     }
+}
+
+function testhole() {
+    //navigator.notification.alert("Please jump into the hole and press OK while falling.");
+    alert("Please jump into the hole and press OK while falling.");//notification alert doesn't block thread, alert does.
+    navigator.accelerometer.getCurrentAcceleration(function (res) {
+        document.getElementById("measure").value = res.y;
+    },
+    function () {
+        navigator.notification.alert("Measurement failed :(");
+    });
 }

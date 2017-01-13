@@ -24,7 +24,7 @@ body {
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
-    margin:0px;
+    margin:20px;
     padding:0px;
     width:100%;
 }
@@ -103,6 +103,7 @@ h1 {
 }
 
 #selectedpic{
-    max-height: 100px;
+    max-height: 200px;
+    max-width: calc(100% - 40px);
     width: auto;
 }
