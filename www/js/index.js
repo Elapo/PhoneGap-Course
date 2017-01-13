@@ -33,6 +33,9 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('resume', onResume, false);
+        document.addEventListener('volumedownbutton', onVolume, false);
+        document.addEventListener('volumeupbutton', onVolume, false);    
     },
 
     // deviceready Event Handler
@@ -64,4 +67,12 @@ function showCarrierTypeMessage() {
             //no message required
             break;
     }
+}
+
+function onResume() {
+    navigator.notification.alert("Welcome back!");
+}
+
+function onVolume() {
+    navigator.notification.alert("Not implemented yet :(");
 }
