@@ -101,3 +101,8 @@ h1 {
 .content{
     margin: 20px;
 }
+
+#selectedpic{
+    max-height: 100px;
+    width: auto;
+}

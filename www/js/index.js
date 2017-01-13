@@ -35,7 +35,8 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener('resume', onResume, false);
         document.addEventListener('volumedownbutton', onVolume, false);
-        document.addEventListener('volumeupbutton', onVolume, false);    
+        document.addEventListener('volumeupbutton', onVolume, false);
+        document.getElementById('getpicture').addEventListener('click', getPicture(), false);
     },
 
     // deviceready Event Handler
@@ -44,6 +45,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         showCarrierTypeMessage();
+        getLocation();
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -76,4 +78,24 @@ function onResume() {
 
 function onVolume() {
     navigator.notification.alert("Not implemented yet :(");
+}
+
+function getLocation(){
+    navigator.geolocation.getCurrentPosition(function (loc) {
+        document.getElementById("long").value = loc.coords.longitude;
+        document.getElementById("lat").value = loc.coords.latitude;
+    });
+}
+
+function getPicture() {
+    console.log("Getting pic...");
+    var selected = document.getElementById("selectedpicture");
+    if(app.connectionType == "Cellular"){
+        navigator.camera.getPicture(function (uri) {
+            selected.src = uri;
+        });
+    }
+    else{
+        //pick from library
+    }
 }
