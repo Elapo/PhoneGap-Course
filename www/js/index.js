@@ -129,7 +129,7 @@ function translate(lang) {
         document.getElementById("lblLong").innerHTML = "Longitude:";
         document.getElementById("lblData").innerHTML = "Data van de meting:";
     }
-    else if(lang == "en_GB" || lang == "en-US"){
+    else if(lang == "en-GB" || lang == "en-US"){
         document.getElementById("lblConType").innerHTML = "Connection type:";
         document.getElementById("lblLat").innerHTML = "Latitude:";
         document.getElementById("lblLong").innerHTML = "Longitude:";
